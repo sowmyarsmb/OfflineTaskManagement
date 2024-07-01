@@ -101,8 +101,6 @@ Model <-> ViewModel <-> View
 - **Testing**: Ensure to write unit tests for ViewModel and database operations to maintain code quality.
 
 ## Contact
-For any questions or issues, please contact [Your Email].
 
----
 
 This README provides an overview of the project, including setup instructions and details about the architecture and features. Follow the instructions to get started with the development and customization of the task management application.
