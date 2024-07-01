@@ -1,0 +1,91 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.example.offlinetasktracker'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.offlinetasktracker"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    // Ensure the test source set is correctly configured
+    sourceSets {
+        test {
+            java.srcDirs += 'src/test/java'
+        }
+    }
+}
+
+
+
+dependencies {
+
+        // AndroidX
+        implementation 'androidx.core:core-ktx:1.10.0'
+        implementation 'androidx.appcompat:appcompat:1.5.1'
+        implementation 'com.google.android.material:material:1.8.0'
+        implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+        implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+        implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+        implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+
+        // Room
+        implementation 'androidx.room:room-runtime:2.5.1'
+    implementation 'junit:junit:4.12'
+    kapt 'androidx.room:room-compiler:2.5.1'
+        implementation 'androidx.room:room-ktx:2.5.1'
+        implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
+
+        // RecyclerView
+        implementation 'androidx.recyclerview:recyclerview:1.3.1'
+
+        // Coroutines
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+
+        // Other dependencies
+        implementation 'androidx.activity:activity-ktx:1.6.1'
+        implementation 'androidx.fragment:fragment-ktx:1.5.4'
+
+        testImplementation 'junit:junit:4.13.2'
+
+    // Add dependencies for unit testing (e.g., JUnit, Mockito)
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
+
+
+}
