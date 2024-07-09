@@ -14,9 +14,29 @@ import com.example.offlinetasktracker.viewmodel.TaskViewModel
 class TaskAdapter(private val onClick: (Task) -> Unit) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
 
     private var taskViewModel: TaskViewModel? = null
+    private var originalList: List<Task> = emptyList()
 
     fun setViewModel(viewModel: TaskViewModel) {
         taskViewModel = viewModel
+    }
+
+    override fun submitList(list: List<Task>?) {
+        super.submitList(list)
+        originalList = list ?: emptyList()
+    }
+
+    fun filter(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            originalList
+        } else {
+            originalList.filter {
+                it.title.contains(query, ignoreCase = true) ||
+                        it.description.contains(query, ignoreCase = true) ||
+                        it.category.contains(query, ignoreCase = true) ||
+                        it.tags.contains(query, ignoreCase = true)
+            }
+        }
+        submitList(filteredList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -26,7 +46,7 @@ class TaskAdapter(private val onClick: (Task) -> Unit) : ListAdapter<Task, TaskA
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = getItem(position)
-       /* val decryptedTask = taskViewModel?.decryptTask(task)
+        /*val decryptedTask = taskViewModel?.decryptTask(task)
         taskViewModel?.let { viewModel ->
             val decryptedTask = viewModel.decryptTask(task)
             holder.bind(decryptedTask, onClick)
@@ -72,6 +92,7 @@ class TaskAdapter(private val onClick: (Task) -> Unit) : ListAdapter<Task, TaskA
         }
     }
 }
+
 
 
 

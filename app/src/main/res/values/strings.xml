@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">OfflineTaskTracker</string>
     <string name="add_task">Add task</string>
+    <string name="edit_task">Edit</string>
+    <string name="delete_task">Delete</string>
 
     <string-array name="priority_levels">
         <item>Low</item>

@@ -23,16 +23,24 @@ class TaskActivity : AppCompatActivity() {
         binding = ActivityTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       // task = intent.getParcelableExtra(EXTRA_TASK)
+        task = intent.getParcelableExtra(EXTRA_TASK)
 
-      //  task?.let {
-          //  binding.editTextTitle.setText("Test")
-          //  binding.editTextDescription.setText("Testing")
-            // Initialize other fields like category, due date, and priority
-       // }
+       task?.let {
+           binding.editTextTitle.setText(it.title)
+            binding.editTextDescription.setText(it.description)
+            binding.editTextCategory.setText(it.category)
+            binding.editTextDueDate.setText(it.dueDate)
+            binding.editTextPriority.setText(it.priority)
+            binding.completedCheckbox.setText(it.isCompleted)
+            binding.editTextTags.setText(it.tags)
+        }
 
         binding.buttonSaveTask.setOnClickListener {
             saveTask()
+        }
+
+        binding.buttonDeleteTask.setOnClickListener {
+            deleteTask(task)
         }
     }
 
@@ -75,11 +83,21 @@ class TaskActivity : AppCompatActivity() {
             task?.apply {
                 this.title = title
                 this.description = description
-                // Update other fields like category, due date, and priority
+                this.category = category
+                this.isCompleted = isCompleted
+                this.dueDate = dueDate
+                this.priority = priority
+                this.tags = tags
             }
             taskViewModel.updateTask(task!!)
         }
 
+        finish()
+    }
+    private fun deleteTask(task: Task?) {
+        if (task != null) {
+            taskViewModel.deleteTask(task!!)
+        }
         finish()
     }
 }
